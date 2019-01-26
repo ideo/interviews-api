@@ -12,7 +12,7 @@ return [
                 'transformer' => function(Entry $entry) {
                     return [
                         'title' => $entry->title,
-                        'featured' => $entry->featured,
+                        'featured' => $entry->featured->selected,
                         'video' => $entry->video,
                         'thumbnail' => $entry->thumbnail,
                         'person' => $entry->person,
