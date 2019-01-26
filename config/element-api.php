@@ -12,12 +12,17 @@ return [
                 'transformer' => function(Entry $entry) {
                     return [
                         'title' => $entry->title,
-                        'url' => $entry->url,
+                        'featured' => $entry->featured,
+                        'video' => $entry->video,
+                        'thumbnail' => $entry->thumbnail,
+                        'person' => $entry->person,
+                        'theme' => $entry->theme,
                         'jsonUrl' => UrlHelper::url("interviews/{$entry->slug}.json"),
                     ];
                 },
             ];
         }
+        ''
     ]
 ];
 
