@@ -1,7 +1,7 @@
 /.env
 /.idea
-/vendor
 .DS_Store
+license.key
 
 # ignore log files and databases
 *.log
@@ -27,3 +27,6 @@
 *.zip
 
 *.unison.tmp
+!vendor/
+vendor/*
+!vendor/craftcms

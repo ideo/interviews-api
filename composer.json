@@ -1,6 +1,8 @@
 {
   "require": {
+    "craftcms/aws-s3": "1.0.8",
     "craftcms/cms": "^3.0.0",
+    "craftcms/element-api": "2.5.4",
     "vlucas/phpdotenv": "^2.4.0"
   },
   "autoload": {
