@@ -54,8 +54,8 @@ return [
       // $criteria->group = 'person';
 
       return [
-        'elementType' => Category::class
-        // 'criteria' => $criteria
+        'elementType' => Category::class,
+        'criteria' => ['group' => 'person']
       ];
     },
     'themes.json' =>
@@ -64,8 +64,8 @@ return [
       // $criteria = craft()->elements->getCriteria(ElementType::Category);
       // $criteria->group = 'theme';
       return [
-        'elementType' => Category::class
-        // 'criteria' => $criteria
+        'elementType' => Category::class,
+        'criteria' => ['group' => 'theme']
       ];
     }
   ]
