@@ -5,6 +5,8 @@ use craft\elements\Category;
 use craft\elements\Asset;
 use craft\helpers\UrlHelper;
 
+global craft;
+
 return [
   'endpoints' => [
     'interviews.json' => /**
@@ -50,22 +52,22 @@ return [
     'people.json' =>
     function() {
       Craft::$app->getResponse()->getHeaders()->set('Access-Control-Allow-Origin', '*');
-      $criteria = craft()->elements->getCriteria(ElementType::Category);
-      $criteria->group = 'person';
+      // $criteria = craft()->elements->getCriteria(ElementType::Category);
+      // $criteria->group = 'person';
 
       return [
-        'elementType' => Category::class,
-        'criteria' => $criteria
+        'elementType' => Category::class
+        // 'criteria' => $criteria
       ];
     },
     'themes.json' =>
     function() {
       Craft::$app->getResponse()->getHeaders()->set('Access-Control-Allow-Origin', '*');
-      $criteria = craft()->elements->getCriteria(ElementType::Category);
-      $criteria->group = 'theme';
+      // $criteria = craft()->elements->getCriteria(ElementType::Category);
+      // $criteria->group = 'theme';
       return [
-        'elementType' => Category::class,
-        'criteria' => $criteria
+        'elementType' => Category::class
+        // 'criteria' => $criteria
       ];
     }
   ]
