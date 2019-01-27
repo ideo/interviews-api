@@ -50,19 +50,22 @@ return [
     'people.json' =>
     function() {
       Craft::$app->getResponse()->getHeaders()->set('Access-Control-Allow-Origin', '*');
+      $criteria = craft()->elements->getCriteria(ElementType::Category);
+      $criteria->group = 'person';
 
       return [
         'elementType' => Category::class,
-        'criteria' => ['category' => 'person']
+        'criteria' => $criteria
       ];
     },
     'themes.json' =>
     function() {
       Craft::$app->getResponse()->getHeaders()->set('Access-Control-Allow-Origin', '*');
-
+      $criteria = craft()->elements->getCriteria(ElementType::Category);
+      $criteria->group = 'theme';
       return [
         'elementType' => Category::class,
-        'criteria' => ['category' => 'theme']
+        'criteria' => $criteria
       ];
     }
   ]
