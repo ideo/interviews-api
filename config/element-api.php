@@ -46,6 +46,24 @@ return [
           ];
         },
       ];
+    },
+    'people.json' =>
+    function() {
+      Craft::$app->getResponse()->getHeaders()->set('Access-Control-Allow-Origin', '*');
+
+      return [
+        'elementType' => Category::class,
+        'criteria' => ['category' => 'person']
+      ];
+    },
+    'themes.json' =>
+    function() {
+      Craft::$app->getResponse()->getHeaders()->set('Access-Control-Allow-Origin', '*');
+
+      return [
+        'elementType' => Category::class,
+        'criteria' => ['category' => 'theme']
+      ];
     }
   ]
 ];
