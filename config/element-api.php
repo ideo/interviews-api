@@ -3,12 +3,16 @@
 use craft\elements\Entry;
 use craft\elements\Category;
 use craft\elements\Asset;
-use craft\elements\GlobalSet;
 use craft\helpers\UrlHelper;
 
 return [
   'endpoints' => [
-    'interviews.json' => function () {
+    'interviews.json' => /**
+     * @return array
+     */
+    function () {
+      Craft::$app->getResponse()->getHeaders()->set('Access-Control-Allow-Origin', '*');
+
       return [
         'elementType' => Entry::class,
         'criteria'    => ['section' => 'interviews'],
