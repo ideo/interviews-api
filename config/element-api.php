@@ -43,8 +43,7 @@ return [
               'title' => $category->title,
               'themedescription' => $category->themedescription,
               ];
-            }, $entry->theme->find()),
-            'jsonUrl' => UrlHelper::url("interviews/{$entry->slug}.json")
+            }, $entry->theme->find())
           ];
         },
       ];
