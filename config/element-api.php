@@ -5,8 +5,6 @@ use craft\elements\Category;
 use craft\elements\Asset;
 use craft\helpers\UrlHelper;
 
-global craft;
-
 return [
   'endpoints' => [
     'interviews.json' => /**
