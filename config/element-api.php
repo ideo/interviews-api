@@ -19,7 +19,6 @@ return [
         'transformer' => function (Entry $entry) {
           return [
             'title'  => $entry->title,
-            'featured' => $entry->featured[0]->selected,
             'person' => array_map(function (Category $category) {
               return [
               'title' => $category->title,
