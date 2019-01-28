@@ -61,7 +61,6 @@ return [
             'city' => $category->city,
             'description' => $category->persondescription,
             'videos' => []
-            }
           ];
         }
       ];
@@ -77,7 +76,6 @@ return [
             'title' => $category->title,
             'description' => $category->themescription,
             'videos' => []
-            }
           ];
       ];
     }
