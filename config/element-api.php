@@ -55,7 +55,15 @@ return [
 
       return [
         'elementType' => Category::class,
-        'criteria' => ['group' => 'person']
+        'criteria' => ['group' => 'person'],
+        'transformer' => function(Category $category) {
+          return [
+            'title' => $category->title,
+            'age' => $category->age,
+            'city' => $category->city,
+            'description' => $category->persondescription
+          ];
+        }
       ];
     },
     'themes.json' =>
