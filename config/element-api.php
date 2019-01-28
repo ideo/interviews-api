@@ -77,9 +77,9 @@ return [
             'description' => $category->themescription,
             'videos' => []
           ];
-      ];
-    }
-  ]
+        }
+      ]
+    ]
 ];
 
 ?>
