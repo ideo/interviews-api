@@ -30,7 +30,9 @@ return [
         'aliases' => [
             '@assetBasePath' => getenv('ASSET_BASE_PATH'),
             '@assetPublicPath' => getenv('ASSET_PUBLIC_PATH')
-        ]
+        ],
+
+        'maxUploadFileSize' => '268435456'
     ],
 
     // Dev environment settings
