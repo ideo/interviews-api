@@ -54,6 +54,7 @@ return [
       // $criteria->group = 'person';
 
       return [
+        'foo' => 'bar',
         'elementType' => Category::class,
         'criteria' => ['group' => 'person'],
         'transformer' => function(Category $category) {
@@ -61,15 +62,7 @@ return [
             'title' => $category->title,
             'age' => $category->age,
             'city' => $category->city,
-            'description' => $category->persondescription,
-            'videos' => array_map(function(Entry $video) {
-              return [
-                // 'theme' => $video->theme,
-                // 'thumbnail' => $video->thumbnail,
-                'title' => $video->title
-                // 'video' => $video->video
-              ];
-            }, $category->video->all())
+            'description' => $category->persondescription
           ];
         }
       ];
