@@ -50,8 +50,6 @@ return [
     'people.json' =>
     function() {
       Craft::$app->getResponse()->getHeaders()->set('Access-Control-Allow-Origin', '*');
-      // $criteria = craft()->elements->getCriteria(ElementType::Category);
-      // $criteria->group = 'person';
 
       return [
         'elementType' => Category::class,
@@ -62,10 +60,7 @@ return [
             'age' => $category->age,
             'city' => $category->city,
             'description' => $category->persondescription,
-            'videos' => function() {
-              return [
-                'title' => 'Hello'
-              ];
+            'videos' => []
             }
           ];
         }
@@ -74,11 +69,16 @@ return [
     'themes.json' =>
     function() {
       Craft::$app->getResponse()->getHeaders()->set('Access-Control-Allow-Origin', '*');
-      // $criteria = craft()->elements->getCriteria(ElementType::Category);
-      // $criteria->group = 'theme';
       return [
         'elementType' => Category::class,
-        'criteria' => ['group' => 'theme']
+        'criteria' => ['group' => 'theme'],
+        'transformer' => function(Category $category) {
+          return [
+            'title' => $category->title,
+            'description' => $category->themescription,
+            'videos' => []
+            }
+          ];
       ];
     }
   ]
