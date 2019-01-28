@@ -98,10 +98,14 @@ return [
                     $query = \craft\elements\Entry::find();
                     $query->section('interviews')->relatedTo($category);
                     $videos = $query->all();
-
                         return [
                             'title'       => $category->title,
                             'description' => $category->themedescription,
+                            'thumbnail' => array_map(function (Asset $thumbnail) {
+                                return [
+                                    'filename' => $thumbnail->filename,
+                                ];
+                            }, $entry->thumbnail->find()),
                             'videos'      => [
                                 array_map(function (Entry $entry) {
                                     return [
