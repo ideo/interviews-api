@@ -68,7 +68,7 @@ return [
                 // 'thumbnail' => $video->thumbnail,
                 'title' => $video->title
                 // 'video' => $video->video
-              ]
+              ];
             }, $category->video->all())
           ];
         }
