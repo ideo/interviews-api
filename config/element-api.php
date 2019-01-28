@@ -3,84 +3,104 @@
 use craft\elements\Entry;
 use craft\elements\Category;
 use craft\elements\Asset;
-use craft\helpers\UrlHelper;
 
 return [
-'endpoints' => [
-'interviews.json' => /**
- * @return array
- */
-function () {
-  Craft::$app->getResponse()->getHeaders()->set('Access-Control-Allow-Origin', '*');
+    'endpoints' => [
+        'people.json' =>
+            function () {
+                Craft::$app->getResponse()->getHeaders()->set('Access-Control-Allow-Origin', '*');
 
-  return [
-  'elementType' => Entry::class,
-  'criteria'    => ['section' => 'interviews'],
-  'transformer' => function (Entry $entry) {
-    return [
-    'title'     => $entry->title,
-    'person'    => array_map(function (Category $category) {
-      return [
-      'title'             => $category->title,
-      'age'               => $category->age,
-      'city'              => $category->city,
-      'persondescription' => $category->persondescription,
-      ];
-    }, $entry->person->find()),
-    'video'     => array_map(function (Asset $asset) {
-      return [
-      'filename' => $asset->filename,
-      ];
-    }, $entry->video->find()),
-    'thumbnail' => array_map(function (Asset $asset) {
-      return [
-      'filename' => $asset->filename,
-      ];
-    }, $entry->thumbnail->find()),
-    'theme'     => array_map(function (Category $category) {
-      return [
-      'title'            => $category->title,
-      'themedescription' => $category->themedescription,
-      ];
-    }, $entry->theme->find())
-    ];
-  },
-  ];
-},
-'people.json'     =>
-function () {
-  Craft::$app->getResponse()->getHeaders()->set('Access-Control-Allow-Origin', '*');
+                return [
+                    'elementType' => Category::class,
+                    'criteria'    => ['group' => 'person'],
+                    'transformer' => function (Category $category) {
+                        /**
+                         * Get the featured video to be able to access to it below.
+                         */
+                        $featured = array_map(function (Entry $entry) {
+                            return [
+                                'id'        => $entry->id,
+                                'title'     => $entry->title,
+                                'video'     => array_map(function (Asset $asset) {
+                                    return [
+                                        'filename' => $asset->filename,
+                                    ];
+                                }, $entry->video->find()),
+                                'thumbnail' => array_map(function (Asset $asset) {
+                                    return [
+                                        'filename' => $asset->filename,
+                                    ];
+                                }, $entry->thumbnail->find()),
+                            ];
+                        }, $category->featured->find());
 
-  return [
-  'elementType' => Category::class,
-  'criteria'    => ['group' => 'person'],
-  'transformer' => function (Category $category) {
-    return [
-    'title'       => $category->title,
-    'age'         => $category->age,
-    'city'        => $category->city,
-    'description' => $category->persondescription,
-    'videos'      => []
-    ];
-  }
-  ];
-},
-'themes.json'     =>
-function () {
-  Craft::$app->getResponse()->getHeaders()->set('Access-Control-Allow-Origin', '*');
-  return [
-  'elementType' => Category::class,
-  'criteria'    => ['group' => 'theme'],
-  'transformer' => function (Category $category) {
-    return [
-    'title'       => $category->title,
-    'description' => $category->themescription,
-    'videos'      => []
-    ];
-  }
-  ];
-}
-]
+                        /**
+                         * The code below is equal to craft.entries.section(section).relatedTo(category).all()
+                         */
+                        $query = \craft\elements\Entry::find();
+                        $query->section('interviews')->relatedTo($category);
+                        $videos = $query->all();
+
+                        /**
+                         * Here we going to remove the FEATURED video from related videos to prevent duplicates.
+                         */
+                        $i = -1;
+                        foreach ($videos as $video) {
+                            $i++;
+                            if ($featured) {
+                                if ($video->id === $featured[0]['id']) {
+                                    unset($videos[$i]);
+                                }
+                            }
+                        }
+                        $videos = array_values($videos);
+
+                        /**
+                         * Return an object :)
+                         */
+                        return [
+                            'title'       => $category->title,
+                            'age'         => $category->age,
+                            'city'        => $category->city,
+                            'description' => $category->persondescription,
+                            'featured'    => $featured,
+                            'videos'      => [
+                                array_map(function (Entry $entry) {
+                                    return [
+                                        'title' => $entry->title,
+                                        'video'     => array_map(function (Asset $asset) {
+                                            return [
+                                                'filename' => $asset->filename,
+                                            ];
+                                        }, $entry->video->find()),
+                                        'thumbnail' => array_map(function (Asset $asset) {
+                                            return [
+                                                'filename' => $asset->filename,
+                                            ];
+                                        }, $entry->thumbnail->find()),
+                                    ];
+                                }, $videos),
+                            ],
+                        ];
+                    }
+                ];
+            },
+        'themes.json' =>
+            function () {
+                Craft::$app->getResponse()->getHeaders()->set('Access-Control-Allow-Origin', '*');
+                return [
+                    'elementType' => Category::class,
+                    'criteria'    => ['group' => 'theme'],
+                    'transformer' => function (Category $category) {
+                        return [
+                            'title'       => $category->title,
+                            'description' => $category->themescription,
+                            'videos'      => []
+                        ];
+                    }
+                ];
+            }
+    ]
 ]
 
 ?>
