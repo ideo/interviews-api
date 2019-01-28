@@ -105,7 +105,7 @@ return [
                                 return [
                                     'filename' => $thumbnail->filename,
                                 ];
-                            }, $category->thumbnail->find()),
+                            }, $category->themethumbnail->find()),
                             'videos'      => [
                                 array_map(function (Entry $entry) {
                                     return [
