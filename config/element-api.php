@@ -80,8 +80,8 @@ return [
                                         'thumbnail' => array_map(function (Asset $asset) {
                                             return [
                                                 'filename' => $asset->filename,
-                                                'tablet' => $asset->getUrl('featuredTablet'),
-                                                'mobile' => $asset->getUrl('featuredMobile')
+                                                'tablet' => Craft::$app->getAssets()->getAssetUrl($asset,'featuredTablet', true),
+                                                'mobile' => Craft::$app->getAssets()->getAssetUrl($asset,'featuredMobile', true)
                                             ];
                                         }, $entry->thumbnail->find()),
                                     ];
@@ -114,8 +114,8 @@ return [
                                 'thumbnail' => array_map(function (Asset $asset) {
                                     return [
                                         'filename' => $asset->filename,
-                                        'tablet' => $asset->getUrl('featuredTablet'),
-                                        'mobile' => $asset->getUrl('featuredMobile')
+                                        'tablet' => Craft::$app->getAssets()->getAssetUrl($asset,'featuredTablet', true),
+                                        'mobile' => Craft::$app->getAssets()->getAssetUrl($asset,'featuredMobile', true)
                                     ];
                                 }, $entry->thumbnail->find()),
                             ];
@@ -164,8 +164,8 @@ return [
                                         'thumbnail' => array_map(function (Asset $asset) {
                                             return [
                                                 'filename' => $asset->filename,
-                                                'tablet' => $asset->getUrl('featuredTablet'),
-                                                'mobile' => $asset->getUrl('featuredMobile')
+                                                'tablet' => Craft::$app->getAssets()->getAssetUrl($asset,'featuredTablet', true),
+                                                'mobile' => Craft::$app->getAssets()->getAssetUrl($asset,'featuredMobile', true)
                                             ];
                                         }, $entry->thumbnail->find()),
                                     ];
@@ -192,9 +192,11 @@ return [
                         return [
                             'title'       => $category->title,
                             'description' => $category->themedescription,
-                            'thumbnail'   => array_map(function (Asset $thumbnail) {
+                            'thumbnail'   => array_map(function (Asset $asset) {
                                 return [
-                                    'filename' => $thumbnail->filename,
+                                    'filename' => $asset->filename,
+                                    'tablet' => Craft::$app->getAssets()->getAssetUrl($asset,'featuredTablet', true),
+                                    'mobile' => Craft::$app->getAssets()->getAssetUrl($asset,'featuredMobile', true)
                                 ];
                             }, $category->themethumbnail->find()),
                             'videos'      => [
@@ -210,6 +212,8 @@ return [
                                         'thumbnail' => array_map(function (Asset $asset) {
                                             return [
                                                 'filename' => $asset->filename,
+                                                'tablet' => Craft::$app->getAssets()->getAssetUrl($asset,'featuredTablet', true),
+                                                'mobile' => Craft::$app->getAssets()->getAssetUrl($asset,'featuredMobile', true)
                                             ];
                                         }, $entry->thumbnail->find()),
                                     ];
