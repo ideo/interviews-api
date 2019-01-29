@@ -9,9 +9,7 @@ return [
         'people.json' =>
             function () {
                 Craft::$app->getResponse()->getHeaders()->set('Access-Control-Allow-Origin', '*');
-                Craft::$app->getAssets()->getAssetUrl($image,'featuredTablet', true);
-                Craft::$app->getAssets()->getAssetUrl($image,'featuredMobile', true);
-
+            
                 return [
                     'elementType' => Category::class,
                     'criteria'    => ['group' => 'person'],
@@ -95,8 +93,6 @@ return [
         'themes.json' =>
             function () {
                 Craft::$app->getResponse()->getHeaders()->set('Access-Control-Allow-Origin', '*');
-                Craft::$app->getAssets()->getAssetUrl($image,'featuredTablet', true);
-                Craft::$app->getAssets()->getAssetUrl($image,'featuredMobile', true);
 
                 return [
                     'elementType' => Category::class,
