@@ -14,6 +14,8 @@ return [
                     'elementType' => Category::class,
                     'criteria'    => ['group' => 'person'],
                     'transformer' => function (Category $category) {
+                        craft()->config->set('generateTransformsBeforePageLoad', true);
+
                         /**
                          * Get the featured video to be able to access to it below.
                          */
