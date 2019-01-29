@@ -9,12 +9,12 @@ return [
         'test.json' =>
             function () {
                 Craft::$app->getResponse()->getHeaders()->set('Access-Control-Allow-Origin', '*');
-            
+
                 return [
                     'elementType' => Category::class,
                     'criteria'    => ['group' => 'person'],
                     'transformer' => function (Category $category) {
-                        
+
                         /**
                          * Get the featured video to be able to access to it below.
                          */
@@ -28,13 +28,10 @@ return [
                                     ];
                                 }, $entry->video->find()),
                                 'thumbnail' => array_map(function (Asset $asset) {
-                                    Craft::$app->getAssets()->getAssetUrl($asset,'featuredTablet', true);
-                                    Craft::$app->getAssets()->getAssetUrl($asset,'featuredMobile', true);
-
                                     return [
                                         'filename' => $asset->filename,
-                                        'tablet' => $asset->getUrl('featuredTablet'),
-                                        'mobile' => $asset->getUrl('featuredMobile') 
+                                        'tablet' => Craft::$app->getAssets()->getAssetUrl($asset,'featuredTablet', true),
+                                        'mobile' => Craft::$app->getAssets()->getAssetUrl($asset,'featuredMobile', true)
                                     ];
                                 }, $entry->thumbnail->find()),
                             ];
@@ -84,7 +81,7 @@ return [
                                             return [
                                                 'filename' => $asset->filename,
                                                 'tablet' => $asset->getUrl('featuredTablet'),
-                                                'mobile' => $asset->getUrl('featuredMobile') 
+                                                'mobile' => $asset->getUrl('featuredMobile')
                                             ];
                                         }, $entry->thumbnail->find()),
                                     ];
@@ -97,7 +94,7 @@ return [
         'people.json' =>
             function () {
                 Craft::$app->getResponse()->getHeaders()->set('Access-Control-Allow-Origin', '*');
-            
+
                 return [
                     'elementType' => Category::class,
                     'criteria'    => ['group' => 'person'],
@@ -118,7 +115,7 @@ return [
                                     return [
                                         'filename' => $asset->filename,
                                         'tablet' => $asset->getUrl('featuredTablet'),
-                                        'mobile' => $asset->getUrl('featuredMobile') 
+                                        'mobile' => $asset->getUrl('featuredMobile')
                                     ];
                                 }, $entry->thumbnail->find()),
                             ];
@@ -168,7 +165,7 @@ return [
                                             return [
                                                 'filename' => $asset->filename,
                                                 'tablet' => $asset->getUrl('featuredTablet'),
-                                                'mobile' => $asset->getUrl('featuredMobile') 
+                                                'mobile' => $asset->getUrl('featuredMobile')
                                             ];
                                         }, $entry->thumbnail->find()),
                                     ];
