@@ -9,13 +9,13 @@ return [
         'people.json' =>
             function () {
                 Craft::$app->getResponse()->getHeaders()->set('Access-Control-Allow-Origin', '*');
+                Craft::$app->getAssets()->getAssetUrl($image,'featuredTablet', true);
+                Craft::$app->getAssets()->getAssetUrl($image,'featuredMobile', true);
 
                 return [
                     'elementType' => Category::class,
                     'criteria'    => ['group' => 'person'],
                     'transformer' => function (Category $category) {
-                        craft()->config->set('generateTransformsBeforePageLoad', true);
-
                         /**
                          * Get the featured video to be able to access to it below.
                          */
@@ -82,7 +82,7 @@ return [
                                             return [
                                                 'filename' => $asset->filename,
                                                 'tablet' => $asset->getUrl('featuredTablet'),
-                                                'mobile' => $asset->getUrl('featuredMobile') 
+                                                'mobile' => $assetgetUrl('featuredMobile') 
                                             ];
                                         }, $entry->thumbnail->find()),
                                     ];
@@ -95,6 +95,9 @@ return [
         'themes.json' =>
             function () {
                 Craft::$app->getResponse()->getHeaders()->set('Access-Control-Allow-Origin', '*');
+                Craft::$app->getAssets()->getAssetUrl($image,'featuredTablet', true);
+                Craft::$app->getAssets()->getAssetUrl($image,'featuredMobile', true);
+
                 return [
                     'elementType' => Category::class,
                     'criteria'    => ['group' => 'theme'],
