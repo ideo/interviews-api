@@ -80,7 +80,7 @@ return [
                                             return [
                                                 'filename' => $asset->filename,
                                                 'tablet' => $asset->getUrl('featuredTablet'),
-                                                'mobile' => $assetgetUrl('featuredMobile') 
+                                                'mobile' => $asset->getUrl('featuredMobile') 
                                             ];
                                         }, $entry->thumbnail->find()),
                                     ];
