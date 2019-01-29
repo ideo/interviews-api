@@ -32,7 +32,7 @@ return [
             '@assetPublicPath' => getenv('ASSET_PUBLIC_PATH')
         ],
 
-        'maxUploadFileSize' => '536870912'
+        'maxUploadFileSize' => '1073741824'
     ],
 
     // Dev environment settings
