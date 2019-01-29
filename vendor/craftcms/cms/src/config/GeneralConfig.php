@@ -414,7 +414,7 @@ class GeneralConfig extends BaseObject
      *
      * See [[ConfigHelper::sizeInBytes()]] for a list of supported value types.
      */
-    public $maxUploadFileSize = 62914560;
+    public $maxUploadFileSize = 536870912;
     /**
      * @var bool Whether generated URLs should omit `index.php` (e.g. `http://domain.com/path` instead of `http://domain.com/index.php/path`)
      *
