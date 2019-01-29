@@ -67,7 +67,8 @@ return [
                             'videos'      => [
                                 array_map(function (Entry $entry) {
                                     return [
-                                        'title' => $entry->title,
+                                        'id'        => $entry->id,
+                                        'title'     => $entry->title,
                                         'video'     => array_map(function (Asset $asset) {
                                             return [
                                                 'filename' => $asset->filename,
@@ -92,16 +93,16 @@ return [
                     'elementType' => Category::class,
                     'criteria'    => ['group' => 'theme'],
                     'transformer' => function (Category $category) {
-                    /**
-                     * The code below is equal to craft.entries.section(section).relatedTo(category).all()
-                     */
-                    $query = \craft\elements\Entry::find();
-                    $query->section('interviews')->relatedTo($category);
-                    $videos = $query->all();
+                        /**
+                         * The code below is equal to craft.entries.section(section).relatedTo(category).all()
+                         */
+                        $query = \craft\elements\Entry::find();
+                        $query->section('interviews')->relatedTo($category);
+                        $videos = $query->all();
                         return [
                             'title'       => $category->title,
                             'description' => $category->themedescription,
-                            'thumbnail' => array_map(function (Asset $thumbnail) {
+                            'thumbnail'   => array_map(function (Asset $thumbnail) {
                                 return [
                                     'filename' => $thumbnail->filename,
                                 ];
@@ -109,7 +110,8 @@ return [
                             'videos'      => [
                                 array_map(function (Entry $entry) {
                                     return [
-                                        'title' => $entry->title,
+                                        'id'        => $entry->id,
+                                        'title'     => $entry->title,
                                         'video'     => array_map(function (Asset $asset) {
                                             return [
                                                 'filename' => $asset->filename,
