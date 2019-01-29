@@ -6,6 +6,94 @@ use craft\elements\Asset;
 
 return [
     'endpoints' => [
+        'test.json' =>
+            function () {
+                Craft::$app->getResponse()->getHeaders()->set('Access-Control-Allow-Origin', '*');
+            
+                return [
+                    'elementType' => Category::class,
+                    'criteria'    => ['group' => 'person'],
+                    'transformer' => function (Category $category) {
+                        
+                        /**
+                         * Get the featured video to be able to access to it below.
+                         */
+                        $featured = array_map(function (Entry $entry) {
+                            return [
+                                'id'        => $entry->id,
+                                'title'     => $entry->title,
+                                'video'     => array_map(function (Asset $asset) {
+                                    return [
+                                        'filename' => $asset->filename,
+                                    ];
+                                }, $entry->video->find()),
+                                'thumbnail' => array_map(function (Asset $asset) {
+                                    Craft::$app->getAssets()->getAssetUrl($asset,'featuredTablet', true);
+                                    Craft::$app->getAssets()->getAssetUrl($asset,'featuredMobile', true);
+
+                                    return [
+                                        'filename' => $asset->filename,
+                                        'tablet' => $asset->getUrl('featuredTablet'),
+                                        'mobile' => $asset->getUrl('featuredMobile') 
+                                    ];
+                                }, $entry->thumbnail->find()),
+                            ];
+                        }, $category->featured->find());
+
+                        /**
+                         * The code below is equal to craft.entries.section(section).relatedTo(category).all()
+                         */
+                        $query = \craft\elements\Entry::find();
+                        $query->section('interviews')->relatedTo($category);
+                        $videos = $query->all();
+
+                        /**
+                         * Here we going to remove the FEATURED video from related videos to prevent duplicates.
+                         */
+                        $i = -1;
+                        foreach ($videos as $video) {
+                            $i++;
+                            if ($featured) {
+                                if ($video->id === $featured[0]['id']) {
+                                    unset($videos[$i]);
+                                }
+                            }
+                        }
+                        $videos = array_values($videos);
+
+                        /**
+                         * Return an object :)
+                         */
+                        return [
+                            'title'       => $category->title,
+                            'age'         => $category->age,
+                            'city'        => $category->city,
+                            'description' => $category->persondescription,
+                            'featured'    => $featured,
+                            'videos'      => [
+                                array_map(function (Entry $entry) {
+                                        return [
+                                        'id'        => $entry->id,
+                                        'title'     => $entry->title,
+                                        'video'     => array_map(function (Asset $asset) {
+                                            return [
+                                                'filename' => $asset->filename,
+                                            ];
+                                        }, $entry->video->find()),
+                                        'thumbnail' => array_map(function (Asset $asset) {
+                                            return [
+                                                'filename' => $asset->filename,
+                                                'tablet' => $asset->getUrl('featuredTablet'),
+                                                'mobile' => $asset->getUrl('featuredMobile') 
+                                            ];
+                                        }, $entry->thumbnail->find()),
+                                    ];
+                                }, $videos),
+                            ],
+                        ];
+                    }
+                ];
+            },
         'people.json' =>
             function () {
                 Craft::$app->getResponse()->getHeaders()->set('Access-Control-Allow-Origin', '*');
@@ -68,7 +156,7 @@ return [
                             'featured'    => $featured,
                             'videos'      => [
                                 array_map(function (Entry $entry) {
-                                    return [
+                                        return [
                                         'id'        => $entry->id,
                                         'title'     => $entry->title,
                                         'video'     => array_map(function (Asset $asset) {
