@@ -29,8 +29,8 @@ return [
                                 'thumbnail' => array_map(function (Asset $asset) {
                                     return [
                                         'filename' => $asset->filename,
-                                        'tablet' => $asset.getUrl('featuredTablet'),
-                                        'mobile' => $asset.getUrl('featuredMobile') 
+                                        'tablet' => $asset->getUrl('featuredTablet'),
+                                        'mobile' => $asset->getUrl('featuredMobile') 
                                     ];
                                 }, $entry->thumbnail->find()),
                             ];
@@ -79,8 +79,8 @@ return [
                                         'thumbnail' => array_map(function (Asset $asset) {
                                             return [
                                                 'filename' => $asset->filename,
-                                                'tablet' => $asset.getUrl('featuredTablet'),
-                                                'mobile' => $asset.getUrl('featuredMobile') 
+                                                'tablet' => $asset->getUrl('featuredTablet'),
+                                                'mobile' => $asset->getUrl('featuredMobile') 
                                             ];
                                         }, $entry->thumbnail->find()),
                                     ];
