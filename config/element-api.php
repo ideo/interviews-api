@@ -79,8 +79,7 @@ return [
                                         'thumbnail' => array_map(function (Asset $asset) {
                                             return [
                                                 'filename' => $asset->filename,
-                                                'tablet' => Craft::$app->getAssets()->getAssetUrl($asset,'featuredTablet', true),
-                                                'mobile' => Craft::$app->getAssets()->getAssetUrl($asset,'featuredMobile', true)
+                                                'universal' => Craft::$app->getAssets()->getAssetUrl($asset,'gridThumbnail', true),
                                             ];
                                         }, $entry->thumbnail->find()),
                                     ];
@@ -127,8 +126,7 @@ return [
                                         'thumbnail' => array_map(function (Asset $asset) {
                                             return [
                                                 'filename' => $asset->filename,
-                                                'tablet' => Craft::$app->getAssets()->getAssetUrl($asset,'featuredTablet', true),
-                                                'mobile' => Craft::$app->getAssets()->getAssetUrl($asset,'featuredMobile', true)
+                                                'universal' => Craft::$app->getAssets()->getAssetUrl($asset,'gridThumbnail', true),
                                             ];
                                         }, $entry->thumbnail->find()),
                                     ];
