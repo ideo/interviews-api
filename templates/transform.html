@@ -1,0 +1,5 @@
+{% set images = craft.assets.source('interviewsAssets').limit(100).offset(0) %}
+{% for image in images %}
+<img src="{{ image.url('featuredMobile') }}">
+<img src="{{ image.url('featuredTablet') }}">
+{% endfor %}
