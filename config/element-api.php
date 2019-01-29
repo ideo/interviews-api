@@ -30,7 +30,8 @@ return [
                                     return [
                                         'filename' => $asset->filename,
                                         'tablet' => Craft::$app->getAssets()->getAssetUrl($asset,'featuredTablet', true),
-                                        'mobile' => Craft::$app->getAssets()->getAssetUrl($asset,'featuredMobile', true)
+                                        'mobile' => Craft::$app->getAssets()->getAssetUrl($asset,'featuredMobile', true),
+                                        'lazyLoad' => Craft::$app->getAssets()->getAssetUrl($asset,'lazyLoad', true)
                                     ];
                                 }, $entry->thumbnail->find()),
                             ];
@@ -80,6 +81,7 @@ return [
                                             return [
                                                 'filename' => $asset->filename,
                                                 'universal' => Craft::$app->getAssets()->getAssetUrl($asset,'gridThumbnail', true),
+                                                'lazyLoad' => Craft::$app->getAssets()->getAssetUrl($asset,'lazyLoad', true),
                                             ];
                                         }, $entry->thumbnail->find()),
                                     ];
@@ -110,7 +112,8 @@ return [
                                 return [
                                     'filename' => $asset->filename,
                                     'tablet' => Craft::$app->getAssets()->getAssetUrl($asset,'featuredTablet', true),
-                                    'mobile' => Craft::$app->getAssets()->getAssetUrl($asset,'featuredMobile', true)
+                                    'mobile' => Craft::$app->getAssets()->getAssetUrl($asset,'featuredMobile', true),
+                                    'lazyLoad' => Craft::$app->getAssets()->getAssetUrl($asset,'lazyLoad', true),
                                 ];
                             }, $category->themethumbnail->find()),
                             'videos'      => [
@@ -127,6 +130,7 @@ return [
                                             return [
                                                 'filename' => $asset->filename,
                                                 'universal' => Craft::$app->getAssets()->getAssetUrl($asset,'gridThumbnail', true),
+                                                'lazyLoad' => Craft::$app->getAssets()->getAssetUrl($asset,'lazyLoad', true),
                                             ];
                                         }, $entry->thumbnail->find()),
                                     ];
